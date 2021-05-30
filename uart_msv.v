@@ -4,7 +4,8 @@ module uart_msv(
 	input rx,
 	input	[7:0] idata,
 	input newTxData,
-	
+
+	:wq
 	output reg oce,
 	output reg[7:0] odata,
 	output reg newRxData,
