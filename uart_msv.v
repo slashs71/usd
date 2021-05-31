@@ -5,7 +5,6 @@ module uart_msv(
 	input	[7:0] idata,
 	input newTxData,
 
-	:wq
 	output reg oce,
 	output reg[7:0] odata,
 	output reg newRxData,
@@ -120,12 +119,12 @@ localparam bit_mid=bit_tau/2;
 always@(posedge clk)	begin
 	case(state)
 		S4:
-			if (bit_cntr==0)
-				tx=0;
-			else if (bit_cntr==9)
-				tx=1;
-			else
+		        if (bit_cntr==0)
+				tx<=0;
+			else if ((bit_cntr>0)&&(bit_cntr<=9))
 				tx<=tx_data[bit_cntr-1];
+			else
+				tx<=1;
 		default:
 			tx<=1;
 	endcase
